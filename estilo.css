@@ -1,0 +1,20 @@
+.fundoVermelho{
+    color: white;
+    background-color: red;
+    text-align: right;
+    font-size: 30pt;
+}
+
+.fundoAmarelo{
+    color: blue;
+    background-color: yellow;
+    text-align: center;
+    font-size: 40pt;
+}
+
+.fundoBranco{
+    color: black;
+    background-color: white;
+    text-align: center;
+    font-size: 50pt;
+}
