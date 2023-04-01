@@ -22,7 +22,7 @@ if(isset($_POST['btn_dividir'])){
     $d1 = $_POST['d1'];
     $d2 = $_POST['d2'];
     if($d2 == 0){
-        echo 'Não pode multiplicar por zero';
+        echo 'Não pode dividir por zero';
     }
     else{
         $dividido = $d1 / $d2;
@@ -51,43 +51,47 @@ if(isset($_POST['btn_subtrair'])){
     <form action="calculadora.php" method="post">
         <h1>SOMAR</h1>
         <label>Numero 1:</label>
-        <input name="s1" value="<?= $s1 ?>">
+        <input name="s1" value="<?= $s1 ?>"><br>
         <label>Numero 2:</label>
-        <input name="s2" value="<?= $s2 ?>">
-        <button name="btn_somar">Somar</button>
+        <input name="s2" value="<?= $s2 ?>"><br><br>
+        <button name="btn_somar">Somar</button><br><br>
         <label>Soma:</label>
-        <input value="<?= $somado ?>" disabled>
+        <input value="<?= $somado ?>" disabled><br><br>
     </form>
     <hr>
     <form action="calculadora.php" method="post">
         <h1>MULTIPLICAR</h1>
         <label>Numero 1:</label>
-        <input name="m1" value="<?= $m1 ?>">
-        <label>Numero 1:</label>
-        <input name="m2" value="<?= $m2 ?>">
-        <button name="btn_multiplicar">Multiplicar</button>
-        <input value="<?= $multiplicado ?>" disabled>
+        <input name="m1" value="<?= $m1 ?>"><br>
+        <label>Numero 2:</label>
+        <input name="m2" value="<?= $m2 ?>"><br><br>
+        <button name="btn_multiplicar">Multiplicar</button><br><br>
+        <label>Multiplicação:</label>
+        <input value="<?= $multiplicado ?>" disabled><br><br>
     </form>
     <hr>
     <form action="calculadora.php" method="post">
         <h1>DIVIDIR</h1>
         <label>Numero 1:</label>
-        <input name="d1" value="<?= $d1 ?>">
+        <input name="d1" value="<?= $d1 ?>"><br>
         <label>Numero 2:</label>
-        <input name="d2" value="<?= $d2 ?>">
-        <button name="btn_dividir">Dividir</button>
-        <input value="<?= $dividido ?>" disabled>
+        <input name="d2" value="<?= $d2 ?>"><br><br>
+        <button name="btn_dividir">Dividir</button><br><br>
+        <label>Divisão:</label>
+        <input value="<?= $dividido ?>" disabled><br><br>
     </form>
     <hr>
     <form action="calculadora.php" method="post">
         <h1>SUBTRAIR</h1>
         <label>Numero 1:</label>
-        <input name="sub1" value="<?= $sub1 ?>">
+        <input name="sub1" value="<?= $sub1 ?>"><br>
         <label>Numero 2:</label>
-        <input name="sub2" value="<?= $sub2 ?>">
-        <button name="btn_subtrair">Subtrair</button>
-        <input value="<?= $subtraido ?>" disabled>
+        <input name="sub2" value="<?= $sub2 ?>"><br><br>
+        <button name="btn_subtrair">Subtrair</button><br><br>
+        <label>Subtração:</label>
+        <input value="<?= $subtraido ?>" disabled><br><br>
     </form>
+    <hr>
 </body>
 
 </html>
