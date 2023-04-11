@@ -1,40 +1,40 @@
 <?php
 
-$s1 = ''; $s2 = ''; $somado = '';
-$m1 = ''; $m2 = ''; $multiplicado = '';
-$d1 = ''; $d2 = ''; $dividido = '';
-$sub1 = ''; $sub2 = ''; $subtraido = '';
+$s1 = '';
+$s2 = '';
+$somado = '';
+$m1 = '';
+$m2 = '';
+$multiplicado = '';
+$d1 = '';
+$d2 = '';
+$dividido = '';
+$sub1 = '';
+$sub2 = '';
+$subtraido = '';
 
 
 if (isset($_POST['btn_somar'])) {
     $s1 = $_POST['s1'];
     $s2 = $_POST['s2'];
     $somado = $s1 + $s2;
-}
-
-if(isset($_POST['btn_multiplicar'])){
+} else if (isset($_POST['btn_multiplicar'])) {
     $m1 = $_POST['m1'];
     $m2 = $_POST['m2'];
     $multiplicado = $m1 * $m2;
-}
-
-if(isset($_POST['btn_dividir'])){
+} else if (isset($_POST['btn_dividir'])) {
     $d1 = $_POST['d1'];
     $d2 = $_POST['d2'];
-    if($d2 == 0){
+    if ($d2 == 0) {
         echo 'Não pode dividir por zero';
-    }
-    else{
+    } else {
         $dividido = $d1 / $d2;
-    }    
-}
-
-if(isset($_POST['btn_subtrair'])){
+    }
+} else if (isset($_POST['btn_subtrair'])) {
     $sub1 = $_POST['sub1'];
     $sub2 = $_POST['sub2'];
     $subtraido = $sub1 - $sub2;
 }
-
 ?>
 
 <!DOCTYPE html>
