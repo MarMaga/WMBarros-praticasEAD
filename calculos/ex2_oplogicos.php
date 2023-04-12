@@ -14,15 +14,20 @@ if (isset($_POST['btn_verificar'])) {
 
     $meioVm = $vm / 2;
 
-    if ($meioVm > $vi and $meioVm < $vf) {
+    if ($vi > $vf) {
+        $vtemp = $vf;
+        $vf = $vi;
+        $vi = $vtemp;
+    }
+
+    if ($meioVm >= $vi and $meioVm <= $vf) {
         echo 'O número ' . $meioVm . ' <b>ESTÁ</b> entre o número INICIAL ' . $vi . ' e o número FINAL ' . $vf . '<hr>';
     } else {
         echo 'O número ' . $meioVm . ' <b>NÃO ESTÁ</b> entre o número INICIAL ' . $vi . ' e o número FINAL ' . $vf . '<hr>';
     }
-
 }
 
-if(isset($_POST['btn_limpar'])){
+if (isset($_POST['btn_limpar'])) {
     $vi = $vm = $meioVm = $vf = '';
 }
 
