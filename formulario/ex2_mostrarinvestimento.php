@@ -7,8 +7,8 @@ if(
     $_GET['vlrinvest'] == '' ||
     !isset($_GET['siglainvest']) ||
     $_GET['siglainvest'] == '' ||
-    !isset($_GET['siglabanco']) ||
-    $_GET['siglabanco'] == ''){
+    !isset($_GET['nomebanco']) ||
+    $_GET['nomebanco'] == ''){
         header('location: ex2_pegarinvestimento.php');
         exit;
     }
@@ -16,20 +16,12 @@ if(
 $nome = $_GET['nome'];
 $vlrinvest = $_GET['vlrinvest'];
 $siglainvest = $_GET['siglainvest'];
-$siglabanco = $_GET['siglabanco'];
+$nomebanco = $_GET['nomebanco'];
 
 if($siglainvest == 'G'){
     $percentGP = 0.03;
 }else{
     $percentGP = -0.05;
-}
-
-if($siglabanco == 'SA'){
-    $nomebanco = 'SANTANDER';
-}elseif($siglabanco == 'IT'){
-    $nomebanco = 'ITAÚ';
-}else{
-    $nomebanco = 'SICREDI';
 }
 
 $vlrinvest = floatval($vlrinvest);
