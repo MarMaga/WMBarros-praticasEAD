@@ -1,5 +1,5 @@
 <?php
-require_once 'funcao/funcoes.php';
+require_once 'funcoes.php';
 
 $meses = array();
 $meses[] = 'OUT';
@@ -14,7 +14,8 @@ if (isset($_POST['btn_calcular'])) {
         $vendas[] = str_replace(",", ".", trim($_POST['vm' . $i + 1]));
         $descontos[] = str_replace(",", ".", trim($_POST['dm' . $i + 1]));
     }
-echo RemoveLetras($vendas[0]);
+
+    echo AjustaCasasDecimais($vendas[0],2) . '<br>';
     $errodigitacao = False;
 
     for ($i = 0; $i < 3; $i++) {
