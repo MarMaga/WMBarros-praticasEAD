@@ -17,8 +17,10 @@ if(isset($_POST['btn_ver'])){
         }
     }
 
-    if($mostrar) for($i=0; $i<$qtd; $i++) echo "FRUTA GUARDADA NA POSIÇÃO $i é: $frutas[$i]<br>";
- 
+    if($mostrar){
+        for($i=0; $i<$qtd; $i++) echo "FRUTA GUARDADA NA POSIÇÃO $i é: $frutas[$i]<br>";
+        echo '<hr>';
+    } 
 }
 
 /* $fr1 = $fr2 = $fr3 = $fr4 = $fr5 = '';
@@ -65,7 +67,7 @@ if (isset($_POST['btn_ver'])) {
 <body>
     <form action="lacoscomarray4.php" method="post">
         <?php for ($i = 0; $i < $qtd; $i++) { ?>
-            <label>Fruta <?= $i + 1 ?>:</label>
+            <label>Fruta <?= $i+1 ?>:</label>
             <input name="<?= "fr" . $i+1 ?>" value="<?= isset($frutas) ? $frutas[$i] : '' ?>"><br><br>
         <?php } ?>
 
