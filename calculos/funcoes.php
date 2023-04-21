@@ -1,102 +1,85 @@
 <?php
 
-function VerificaDigitado($tipo, $conteudo){
-
-if($tipo == '$'){
-
-}elseif($tipo == '%'){
-    
-}
-
-
-}
-
-function AjustaCasasDecimais($campo,$qtd){
+function AjustaCasasDecimais($campo, $qtd)
+{
+    # $campo: o campo a ser ajustado
+    # $qtd: o número de casas decimais para ajustar em $campo
+    # verifica se existe ponto decimal em $campo, mantém apenas os números e o ponto decimal, se $qtd > 0
 
     $localPontoVirgula = 0;
 
-    # encontra o local do ponto ou da vírgula a partir da esquerda
-    for($i=strlen(trim($campo)); $i>=0; $i--){    
-        if(substr($campo,$i,1) == '.' || substr($campo,$i,1) == ','){
+    # encontra o local do primeiro ponto/vírgula a partir da direita
+    for ($i = strlen(trim($campo)); $i >= 0; $i--) {
+        if (substr($campo, $i, 1) == '.' || substr($campo, $i, 1) == ',') {
             $localPontoVirgula = $i;
             break;
         }
     }
-    if($localPontoVirgula > 0) $localPontoVirgula++;
-    echo 'Local do ponto/virgula: ' . $localPontoVirgula . '<br>';    
 
-    # remove qualquer outro ponto e vírgula à esquerda do $localPontoVirgula
-    $esqDoCampo = substr($campo,0,$localPontoVirgula-1);
-    echo "Esquerda do campo: $esqDoCampo<br>";
-    $esqSoNum = '';
-    for($i=0; $i<=$localPontoVirgula-1; $i++){
-        if(is_numeric(substr($esqDoCampo,$i,1))){
-            $esqSoNum = $esqSoNum . substr($esqDoCampo,$i,1);
+    # se encontrou ponto/vírgula, tem ponto decimal
+    if ($localPontoVirgula > 0) {
+        # como substr considera o primeiro caracter como zero, adiciona 1 para tratar da posição real
+        $localPontoVirgula++;
     }
-    echo "Esquerda só números: $esqSoNum <br>";
+ 
+    # se não tem ponto decimal, o que foi digitado deve ser incluído em $esqDoCampo
+    if ($localPontoVirgula == 0) {
+        $esqDoCampo = $campo;
 
-    if($qtd > 0){
-        # se não tem ponto decimal
-        if($localPontoVirgula == 0){
+        # remove qualquer outro ponto/vírgula de $esqDoCampo
+        $esqSoNum = '';
+        for ($i = 0; $i <= strlen($esqDoCampo); $i++) {
+            if (is_numeric(substr($esqDoCampo, $i, 1))) {
+                $esqSoNum = $esqSoNum . substr($esqDoCampo, $i, 1);
+            }
+        }
+    } else { # se tem ponto decimal, deve lançar em $esqDoCampo apenas o que está à esquerda do ponto decimal
+        $esqDoCampo = substr($campo, 0, $localPontoVirgula - 1);
+
+        # remove qualquer outro ponto/vírgula de $esqDoCampo
+        $esqSoNum = '';
+        for ($i = 0; $i <= $localPontoVirgula - 1; $i++) {
+            if (is_numeric(substr($esqDoCampo, $i, 1))) {
+                $esqSoNum = $esqSoNum . substr($esqDoCampo, $i, 1);
+            }
+        }
+    }
+ 
+    # se não deve ter casas decimais
+    if ($qtd == 0) {
+        return $esqSoNum;
+    } else { # se deve ter casas decimais
+
+        # remove qualquer outro ponto e vírgula à direita do $localPontoVirgula
+        $dirDoCampo = substr($campo, $localPontoVirgula, strlen($campo));
+ 
+        $dirSoNum = '';
+        for ($i = 0; $i <= $localPontoVirgula - 1; $i++) {
+            if (is_numeric(substr($dirDoCampo, $i, 1))) {
+                $dirSoNum = $dirSoNum . substr($dirDoCampo, $i, 1);
+            }
+        }
+ 
+        # se é para ter ponto decimal
+        if ($qtd > 0) {
             # inclui o ponto decimal antes de inserir os zeros que faltam
             $esqSoNum = $esqSoNum . '.';
         }
 
-        $qtdCasasDecimais = 0;
+        $qtdCasasDecimais = strlen($dirSoNum);
 
-        if($localPontoVirgula > 0){
-            # encontra a quantidade de casas decimais de $campo
-            $qtdCasasDecimais = strlen($campo) - $localPontoVirgula;
-        }
-        echo 'Quantidade casas decimais: ' . $qtdCasasDecimais . '<br>';
-
-        if($qtdCasasDecimais < $qtd){
-            for($i=$qtdCasasDecimais; $i<$qtd; $i++){
-                $esqSoNum = $esqSoNum . '0';
+        if ($qtdCasasDecimais < $qtd) {
+            for ($i = $qtdCasasDecimais; $i < $qtd; $i++) {
+                $dirSoNum = $dirSoNum . '0';
             }
-        }else{
-            $campo = $esqSoNum . substr($campo,$localPontoVirgula,2);
+        } elseif ($qtdCasasDecimais > $qtd) {
+            $dirSoNum = substr($dirSoNum, 0, $qtd);
         }
+
+        $campo = $esqSoNum . $dirSoNum;
+
+        return $campo;
     }
-
-    return $campo;
-}
-}
-
-function ContaPontos($campo){
-
-    $qtdPontos = 0;
-
-    for($i=0; $i<=strlen(trim($campo)); $i++){
-        if(substr($campo,$i,1) == '.') $qtdPontos++;
-    }
-
-    return $qtdPontos;
-}
-
-function ContaVirgulas($campo){
-
-    $qtdVirgulas = 0;
-
-    for($i=0; $i<=strlen(trim($campo)); $i++){
-        if(substr($campo,$i,1) == '.') $qtdVirgulas++;
-    }
-
-    return $qtdVirgulas;
-}
-
-function RemoveLetras($campo){
-    
-    $campo = trim($campo);
-    $campolimpo = '';
-
-    for($i=0; $i<=strlen($campo)-1; $i++){
-        if(is_numeric(substr($campo,$i,1))){
-            $campolimpo = $campolimpo . substr($campo,$i,1);
-        }
-    }
-
-    return $campolimpo;
 }
 
 ?>

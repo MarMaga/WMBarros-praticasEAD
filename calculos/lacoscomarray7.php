@@ -15,7 +15,6 @@ if (isset($_POST['btn_calcular'])) {
         $descontos[] = str_replace(",", ".", trim($_POST['dm' . $i + 1]));
     }
 
-    echo AjustaCasasDecimais($vendas[0],2) . '<br>';
     $errodigitacao = False;
 
     for ($i = 0; $i < 3; $i++) {
@@ -36,6 +35,13 @@ if (isset($_POST['btn_calcular'])) {
             $errodigitacao = True;
             break;
         }
+    }
+
+    # ajusta os valores das vendas para conter 2 casas decimais
+    # e as porcentagens dos descontos para não ter casas decimais
+    for($i=0; $i<3; $i++){
+        $vendas[$i] = AjustaCasasDecimais($vendas[$i],2);
+        $descontos[$i] = AjustaCasasDecimais($descontos[$i],0);
     }
 
     if (!$errodigitacao) {
