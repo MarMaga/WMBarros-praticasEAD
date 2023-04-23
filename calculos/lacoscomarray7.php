@@ -10,6 +10,7 @@ if (isset($_POST['btn_calcular'])) {
 
     $vendas = $descontos = $vendasliq = array();
 
+    # substitui as vírgulas por pontos que existirem e remove os espaços anteriores e posteriores digitados
     for ($i = 0; $i < 3; $i++) {
         $vendas[] = str_replace(",", ".", trim($_POST['vm' . $i + 1]));
         $descontos[] = str_replace(",", ".", trim($_POST['dm' . $i + 1]));
@@ -17,6 +18,7 @@ if (isset($_POST['btn_calcular'])) {
 
     $errodigitacao = False;
 
+    # valida a digitação dos campos
     for ($i = 0; $i < 3; $i++) {
         if (!is_numeric($vendas[$i])) {
             echo "Digite um valor de vendas do mês $meses[$i] válido";
@@ -37,14 +39,15 @@ if (isset($_POST['btn_calcular'])) {
         }
     }
 
-    # ajusta os valores das vendas para conter 2 casas decimais
-    # e as porcentagens dos descontos para não ter casas decimais
-    for($i=0; $i<3; $i++){
-        $vendas[$i] = AjustaCasasDecimais($vendas[$i],2);
-        $descontos[$i] = AjustaCasasDecimais($descontos[$i],0);
-    }
-
     if (!$errodigitacao) {
+        # ajusta os valores das vendas para conter 2 casas decimais
+        # e as porcentagens dos descontos para não ter casas decimais
+        for ($i = 0; $i < 3; $i++) {
+            $vendas[$i] = AjustaCasasDecimais($vendas[$i], 2);
+            $descontos[$i] = AjustaCasasDecimais($descontos[$i], 0);
+        }
+
+
         for ($i = 0; $i < 3; $i++) {
 
             if ($descontos[$i] != '' && $descontos[$i] != 0) {
@@ -52,10 +55,10 @@ if (isset($_POST['btn_calcular'])) {
             } else $vendasliq[] = $vendas[$i];
 
             echo 'Venda líquida do mês ' . $meses[$i] . ': R$ ' . number_format($vendasliq[$i], 2, ",", ".") . '<br><br>';
-            
+
             // volta as vírgulas originais que foram substituídas por pontos para os cálculos
-            if(str_contains($vendas[$i],".")) $vendas[$i] = str_replace(".",",",$vendas[$i]);
-            if(str_contains($descontos[$i],".")) $descontos[$i] = str_replace(".",",",$descontos[$i]);
+            if (str_contains($vendas[$i], ".")) $vendas[$i] = str_replace(".", ",", $vendas[$i]);
+            if (str_contains($descontos[$i], ".")) $descontos[$i] = str_replace(".", ",", $descontos[$i]);
         }
     }
 
