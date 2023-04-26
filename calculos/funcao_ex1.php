@@ -34,7 +34,6 @@ if (isset($_POST['btn_calcular'])) {
     }
 }
 
-
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +47,7 @@ if (isset($_POST['btn_calcular'])) {
 </head>
 
 <body>
-    <form action="ex1_funcao.php" method="post">
+    <form action="funcao_ex1.php" method="post">
         <label>Nome do produto:</label>
         <input name="nomeproduto" value="<?= isset($nomeProduto) ? $nomeProduto : '' ?>"><br><br>
         <label>Valor:</label>

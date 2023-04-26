@@ -24,6 +24,12 @@ function AjustaCasasDecimais($campo, $qtd)
     # $qtd: o número de casas decimais para ajustar em $campo
     # verifica se existe ponto decimal em $campo, mantém apenas os números e o ponto decimal, se $qtd > 0
 
+    if (empty($campo)) return '';
+
+    $SoNum = str_replace(",","",$campo);
+    $SoNum = str_replace(".","",$SoNum);
+    if ($SoNum == 0) return 0;
+
     $localPontoVirgula = 0;
 
     # encontra o local do primeiro ponto/vírgula a partir da direita
@@ -33,6 +39,7 @@ function AjustaCasasDecimais($campo, $qtd)
     # só remove o último caracter se o tamanho de $campo for maior que 1
     # porque EncontraPrimeiroPontoVirgula retornará zero que, somado a 1, será igual ao tamanho de $campo
     if (strlen($campo) > 1) {
+
         # enquanto encontrar ponto/vírgula na última posição (mais à direita), remove
         while ($localPontoVirgula + 1 == strlen($campo)) {
 
@@ -40,6 +47,8 @@ function AjustaCasasDecimais($campo, $qtd)
 
             # encontra o local do primeiro ponto/vírgula a partir da direita do novo $campo
             $localPontoVirgula = EncontraPrimeiroPontoVirgula($campo);
+            # se não encontrar ponto/vírgula, deve sair do While
+            if ($localPontoVirgula == 0) break;
         }
     }
 
@@ -51,15 +60,8 @@ function AjustaCasasDecimais($campo, $qtd)
 
     # se não tem ponto decimal, o que foi digitado deve ser incluído em $esqDoCampo
     if ($localPontoVirgula == 0) {
-        $esqDoCampo = $campo;
+        $esqSoNum = $campo;
 
-        // # remove qualquer outro ponto/vírgula de $esqDoCampo
-        // $esqSoNum = '';
-        // for ($i = 0; $i <= strlen($esqDoCampo); $i++) {
-        //     if (is_numeric(substr($esqDoCampo, $i, 1))) {
-        //         $esqSoNum = $esqSoNum . substr($esqDoCampo, $i, 1);
-        //     }
-        // }
     } else { # se tem ponto decimal, deve lançar em $esqDoCampo apenas o que está à esquerda do ponto decimal
         $esqDoCampo = substr($campo, 0, $localPontoVirgula - 1);
 

@@ -58,7 +58,7 @@ if (isset($_POST['btn_enviar'])) {
 </head>
 
 <body>
-    <form action="ex2_funcao.php" method="post">
+    <form action="funcao_ex2.php" method="post">
         <label>Nome:</label>
         <?php if (!isset($NomeInvalido)) { ?>
             <input name="nome" value="<?= isset($Nome) ? $Nome : '' ?>"><br><br>
@@ -94,7 +94,7 @@ if (isset($_POST['btn_enviar'])) {
         <label>Repetir Senha:</label>
         <?php if (!isset($Sen2Invalida)) { ?>
             <input name="senha2" type="password" value="<?= isset($Senha2) ? $Senha2 : '' ?>"
-                style="color: black; background-color: white;"><br><br>
+                class="input-group-text"><br><br>
         <?php } elseif (!$Sen2Invalida) { ?>
             <input name="senha2" type="password" value="<?= isset($Senha2) ? $Senha2 : '' ?>"
                 style="color: white; background-color: green;"><br><br>
