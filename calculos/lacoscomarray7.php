@@ -1,5 +1,5 @@
 <?php
-require_once 'funcoes.php';
+require_once '../funcao/funcoes.php';
 
 $meses = array();
 $meses[] = 'OUT';
@@ -20,7 +20,7 @@ if (isset($_POST['btn_calcular'])) {
 
     # valida a digitação dos campos
     for ($i = 0; $i < 3; $i++) {
-        if (!is_numeric($vendas[$i])) {
+        if (!is_numeric(RemovePontoVirgula($vendas[$i]))) {
             echo "Digite um valor de vendas do mês $meses[$i] válido";
             $errodigitacao = True;
             break;
@@ -46,7 +46,6 @@ if (isset($_POST['btn_calcular'])) {
             $vendas[$i] = AjustaCasasDecimais($vendas[$i], 2);
             $descontos[$i] = AjustaCasasDecimais($descontos[$i], 0);
         }
-
 
         for ($i = 0; $i < 3; $i++) {
 

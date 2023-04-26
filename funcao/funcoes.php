@@ -1,5 +1,11 @@
 <?php
 
+function RemovePontoVirgula($campo){
+    $campo = str_replace(",","",$campo);
+    $campo = str_replace(".","",$campo);
+    return $campo;
+}
+
 function EncontraPrimeiroPontoVirgula($campo)
 {
     $localPontoVirgula = 0;
@@ -47,13 +53,13 @@ function AjustaCasasDecimais($campo, $qtd)
     if ($localPontoVirgula == 0) {
         $esqDoCampo = $campo;
 
-        # remove qualquer outro ponto/vírgula de $esqDoCampo
-        $esqSoNum = '';
-        for ($i = 0; $i <= strlen($esqDoCampo); $i++) {
-            if (is_numeric(substr($esqDoCampo, $i, 1))) {
-                $esqSoNum = $esqSoNum . substr($esqDoCampo, $i, 1);
-            }
-        }
+        // # remove qualquer outro ponto/vírgula de $esqDoCampo
+        // $esqSoNum = '';
+        // for ($i = 0; $i <= strlen($esqDoCampo); $i++) {
+        //     if (is_numeric(substr($esqDoCampo, $i, 1))) {
+        //         $esqSoNum = $esqSoNum . substr($esqDoCampo, $i, 1);
+        //     }
+        // }
     } else { # se tem ponto decimal, deve lançar em $esqDoCampo apenas o que está à esquerda do ponto decimal
         $esqDoCampo = substr($campo, 0, $localPontoVirgula - 1);
 

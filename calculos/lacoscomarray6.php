@@ -30,16 +30,19 @@ if (isset($_POST['btn_pesquisar'])) {
 
     if (!$errodigitacao) {
 
-        $posicao = '';
+        $posicao = array();
 
         for ($i = 0; $i < $quant; $i++) {
-            if ($numpesq == $numeros[$i]) $posicao = $i;
+            if ($numpesq == $numeros[$i]) $posicao[] = $i;
         }
 
-        if ($posicao == '') {
+        if (count($posicao) == 0) {
             echo "Número $numpesq não encontrado<hr>";
         } else {
-            echo "Número $numpesq encontrado na posição $posicao<hr>";
+            for($i=0; $i<count($posicao); $i++){
+                echo "Número $numpesq encontrado na posição $posicao[$i]<br>";
+            }
+            echo '<hr>';
         }
     }
 }

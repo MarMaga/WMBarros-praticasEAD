@@ -38,11 +38,17 @@ if (isset($_POST['btn_armazenar'])) {
             $pesq2 = $temp;
         }
 
+        # mostra os resultados dos cálculos
+        for ($i = 0; $i < 5; $i++) {
+            echo "Raiz quadrada do número " . $i+1 . ': ' . $numQuad[$i] . '<br>';
+        }
+        echo '<br>';
+
         # pesquisa os números digitados em $numQuad e exibe os encontrados
         $numEncontrado = False;
         for ($i = 0; $i < 5; $i++) {
             if ($numQuad[$i] >= $pesq1 && $numQuad[$i] <= $pesq2) {
-                echo 'Número ' . $i+1 . ": <b>$numQuad[$i]</b> que está na posição $i<br>";
+                echo 'Número ' . $i + 1 . ": <b>$numQuad[$i]</b> que está na posição $i<br>";
                 $numEncontrado = True;
             }
         }
