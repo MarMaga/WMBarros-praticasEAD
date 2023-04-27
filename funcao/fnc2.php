@@ -18,16 +18,33 @@ function ValidaCamposIguais($campo, $tammin, $campo2)
     return True;
 }
 
-function Soma9Div1($n1, $n2, $n3, $n4, $n5, $n6, $n7, $n8, $n9, $n10)
+// function Soma9Div1($n1, $n2, $n3, $n4, $n5, $n6, $n7, $n8, $n9, $n10)
+// {
+//     for ($i = 1; $i < 11; $i++) {
+//         if (empty('$n' . $i)) {
+//             return 0;
+//         }
+
+//         '$n' . $i = strval('$n' . $i);
+//     }
+
+//     return ($n1 + $n2 + $n3 + $n4 + $n5 + $n6 + $n7 + $n8 + $n9) / $n10;
+// }
+
+function Soma9Div1($numeros)
 {
-    for ($i = 1; $i < 11; $i++) {
-        if (empty('$n' . $i)) {
+    for ($i = 0; $i < 10; $i++) {
+        if (empty($numeros[$i])) {
             return 0;
         }
-         
-        '$n' . $i = strval('$n' . $i);
+        
+    }
+    $soma = 0;
+    for ($i = 0; $i < 9; $i++) {
+        $soma = $soma + $numeros[$i];
     }
 
-    return ($n1 + $n2 + $n3 + $n4 + $n5 + $n6 + $n7 + $n8 + $n9) / $n10;
+    return $soma / $numeros[9];
 }
+
 ?>

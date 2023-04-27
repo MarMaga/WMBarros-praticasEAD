@@ -1,5 +1,6 @@
 <?php
 
+include_once '../funcao/funcoes.php';
 include_once '../funcao/fnc2.php';
 
 if (isset($_POST['btn_calcular'])) {
@@ -9,14 +10,34 @@ if (isset($_POST['btn_calcular'])) {
     for ($i = 0; $i < 10; $i++) {
         $num[] = $_POST['n' . $i + 1];
     }
-    $soma = Soma9Div1($num[0], $num[1], $num[2], $num[3], $num[4], $num[5], $num[6], $num[7], $num[8], $num[9]);
 
-    if ($soma == 0) {
-        echo 'Preencher TODOS os números<hr>';
-    } else {
-        echo "A soma dos 9 primeiros números dividida pelo último número é $soma<hr>";
+    $errodigitacao = false;
+
+    for ($i = 0; $i < 10; $i++) {
+        if (!is_numeric(str_replace(",",".",$num[$i]))) {
+            echo 'Número ' . $i + 1 . ' inválido<br>';
+            $errodigitacao = true;
+            $cores[$i] = 'border-width: 1px; color: white; background-color: red;';
+        } else $cores[$i] = 'border-width: 1px; color: white; background-color: green;';
     }
 
+    if (!$errodigitacao) {
+        for ($i = 0; $i < 10; $i++) {
+            $num[$i] = str_replace(",",".",$num[$i]);
+        }
+
+        $result = Soma9Div1($num);
+
+        for ($i = 0; $i < 10; $i++) {
+            $num[$i] = str_replace(".",",",$num[$i]);
+        }
+
+        if ($result == 0) {
+            echo 'Preencher TODOS os campos<hr>';
+        } else {
+            $resultado = str_replace(".",",",$result);
+        }
+    } else echo '<hr>';
 }
 
 ?>
@@ -37,9 +58,11 @@ if (isset($_POST['btn_calcular'])) {
             <label>Número
                 <?= $i + 1 ?>:
             </label>
-            <input name="<?= 'n' . $i + 1 ?>" value="<?= isset($num[$i]) ? $num[$i] : '' ?>"><br><br>
+            <input name="<?= 'n' . $i + 1 ?>" value="<?= isset($num[$i]) ? $num[$i] : '' ?>" style="<?=isset($cores[$i]) ? $cores[$i] : 'border-width: 1px; color: black; background-color: white; border-color: grey;'?>"><br><br>
         <?php } ?>
-        <button name="btn_calcular">Calcular</button>
+        <button name="btn_calcular">Calcular</button><br><br>
+        <label>Resultado:</label>
+        <input value="<?= isset($resultado) ? $resultado : '' ?>" disabled style="border-width: 1px; color: black; border-color: black;"></input>
     </form>
 </body>
 
