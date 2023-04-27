@@ -1,5 +1,6 @@
 <?php
 
+include_once '../partes/_head.php';
 include_once '../funcao/funcoes.php';
 include_once '../funcao/fnc2.php';
 
@@ -17,8 +18,8 @@ if (isset($_POST['btn_calcular'])) {
         if (!is_numeric(str_replace(",",".",$num[$i]))) {
             echo 'Número ' . $i + 1 . ' inválido<br>';
             $errodigitacao = true;
-            $cores[$i] = 'border-width: 1px; color: white; background-color: red;';
-        } else $cores[$i] = 'border-width: 1px; color: white; background-color: green;';
+            $cores[$i] = 'bg-danger';
+        } else $cores[$i] = 'bg-success';
     }
 
     if (!$errodigitacao) {
@@ -58,11 +59,11 @@ if (isset($_POST['btn_calcular'])) {
             <label>Número
                 <?= $i + 1 ?>:
             </label>
-            <input name="<?= 'n' . $i + 1 ?>" value="<?= isset($num[$i]) ? $num[$i] : '' ?>" style="<?=isset($cores[$i]) ? $cores[$i] : 'border-width: 1px; color: black; background-color: white; border-color: grey;'?>"><br><br>
+            <input name="<?= 'n' . $i + 1 ?>" value="<?= isset($num[$i]) ? $num[$i] : '' ?>" class="<?=isset($cores[$i]) ? $cores[$i] : 'bg-light'?>"><br>
         <?php } ?>
         <button name="btn_calcular">Calcular</button><br><br>
         <label>Resultado:</label>
-        <input value="<?= isset($resultado) ? $resultado : '' ?>" disabled style="border-width: 1px; color: black; border-color: black;"></input>
+        <input value="<?= isset($resultado) ? $resultado : '' ?>" disabled class="bg-info"></input>
     </form>
 </body>
 
