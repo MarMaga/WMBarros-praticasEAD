@@ -31,13 +31,11 @@ function ValidaCamposIguais($campo, $tammin, $campo2)
 //     return ($n1 + $n2 + $n3 + $n4 + $n5 + $n6 + $n7 + $n8 + $n9) / $n10;
 // }
 
-function Soma9Div1($numeros)
+function Soma9DivUlt($numeros)
 {
     for ($i = 0; $i < 10; $i++) {
-        if (empty($numeros[$i])) {
-            return 0;
-        }
-        
+        if ($numeros[$i] == '') return 0;
+        if ($numeros[9] == 0) return 'div0';
     }
     $soma = 0;
     for ($i = 0; $i < 9; $i++) {
