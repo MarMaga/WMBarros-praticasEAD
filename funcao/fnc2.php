@@ -34,15 +34,16 @@ function ValidaCamposIguais($campo, $tammin, $campo2)
 function Soma9DivUlt($numeros)
 {
     for ($i = 0; $i < 10; $i++) {
-        if ($numeros[$i] == '') return 0;
-        if ($numeros[9] == 0) return 'div0';
-    }
-    $soma = 0;
-    for ($i = 0; $i < 9; $i++) {
-        $soma = $soma + $numeros[$i];
+        if ($numeros[9] == 0)
+            return 'div0';
     }
 
-    return $soma / $numeros[9];
+    $soma = 0;
+    for ($i = 0; $i < 9; $i++) {
+        $soma = $soma + floatval($numeros[$i]);
+    }
+
+    return $soma / floatval($numeros[9]);
 }
 
 ?>
