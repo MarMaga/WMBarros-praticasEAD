@@ -46,4 +46,15 @@ function Soma9DivUlt($numeros)
     return $soma / floatval($numeros[9]);
 }
 
+function EncontraValorAumentado($salario,$porcentagem){
+    if ($salario == '' || $porcentagem == '') return 0;
+    if (!is_numeric($salario)) return -1;
+    if (!is_numeric($porcentagem)) return -1;
+    return $salario * $porcentagem / 100;
+}
+
+function CalculaNovoSalario($salario,$valorAumento){
+    return $salario + $valorAumento;
+}
+
 ?>

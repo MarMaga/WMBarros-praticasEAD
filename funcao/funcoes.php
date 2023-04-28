@@ -26,9 +26,10 @@ function AjustaCasasDecimais($campo, $qtd)
 
     if (empty($campo)) return '';
 
+    # se tem só ponto(s)/vírgula(s), retorna ''
     $SoNum = str_replace(",","",$campo);
     $SoNum = str_replace(".","",$SoNum);
-    if ($SoNum == 0) return 0;
+    if ($SoNum == 0) return '';
 
     $localPontoVirgula = 0;
 
@@ -58,6 +59,7 @@ function AjustaCasasDecimais($campo, $qtd)
         $localPontoVirgula++;
     }
 
+    # define $esqDoCampo
     # se não tem ponto decimal, o que foi digitado deve ser incluído em $esqDoCampo
     if ($localPontoVirgula == 0) {
         $esqSoNum = $campo;
@@ -74,6 +76,19 @@ function AjustaCasasDecimais($campo, $qtd)
         }
     }
 
+    # se não tiver números em $esqSoNum (quando letras e símbolos são digitados sem números)
+    # retorna ''
+    $esqSoN = '';
+    $temNum = false;
+    for ($i=0; $i<strlen($esqSoNum); $i++){
+        if (is_numeric(substr($esqSoNum,$i,1))){
+            $esqSoN = $esqSoN . substr($esqSoNum,$i,1);
+            $temNum = true;
+        }
+    }
+    if (!$temNum) return '';
+    $esqSoNum = $esqSoN;
+    
     # se não deve ter casas decimais
     if ($qtd == 0) {
         return $esqSoNum;
