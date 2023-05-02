@@ -1,8 +1,9 @@
 <?php
 
-function RemovePontoVirgula($campo){
-    $campo = str_replace(",","",$campo);
-    $campo = str_replace(".","",$campo);
+function RemovePontoVirgula($campo)
+{
+    $campo = str_replace(",", "", $campo);
+    $campo = str_replace(".", "", $campo);
     return $campo;
 }
 
@@ -24,12 +25,14 @@ function AjustaCasasDecimais($campo, $qtd)
     # $qtd: o número de casas decimais para ajustar em $campo
     # verifica se existe ponto decimal em $campo, mantém apenas os números e o ponto decimal, se $qtd > 0
 
-    if (empty($campo)) return '';
+    if (empty($campo))
+        return '';
 
     # se tem só ponto(s)/vírgula(s), retorna ''
-    $SoNum = str_replace(",","",$campo);
-    $SoNum = str_replace(".","",$SoNum);
-    if ($SoNum == 0) return '';
+    $SoNum = str_replace(",", "", $campo);
+    $SoNum = str_replace(".", "", $SoNum);
+    if ($SoNum == 0)
+        return '';
 
     $localPontoVirgula = 0;
 
@@ -49,7 +52,8 @@ function AjustaCasasDecimais($campo, $qtd)
             # encontra o local do primeiro ponto/vírgula a partir da direita do novo $campo
             $localPontoVirgula = EncontraPrimeiroPontoVirgula($campo);
             # se não encontrar ponto/vírgula, deve sair do While
-            if ($localPontoVirgula == 0) break;
+            if ($localPontoVirgula == 0)
+                break;
         }
     }
 
@@ -80,15 +84,16 @@ function AjustaCasasDecimais($campo, $qtd)
     # retorna ''
     $esqSoN = '';
     $temNum = false;
-    for ($i=0; $i<strlen($esqSoNum); $i++){
-        if (is_numeric(substr($esqSoNum,$i,1))){
-            $esqSoN = $esqSoN . substr($esqSoNum,$i,1);
+    for ($i = 0; $i < strlen($esqSoNum); $i++) {
+        if (is_numeric(substr($esqSoNum, $i, 1))) {
+            $esqSoN = $esqSoN . substr($esqSoNum, $i, 1);
             $temNum = true;
         }
     }
-    if (!$temNum) return '';
+    if (!$temNum)
+        return '';
     $esqSoNum = $esqSoN;
-    
+
     # se não deve ter casas decimais
     if ($qtd == 0) {
         return $esqSoNum;
@@ -123,4 +128,27 @@ function AjustaCasasDecimais($campo, $qtd)
 
         return $campo;
     }
+}
+
+function CalculoArray($num)
+{
+    $soma3pri = floatval($num[0]) + floatval($num[1]) + floatval($num[2]);
+
+    $resultado = Multiplica($soma3pri,$num[3],$num[4]);
+
+    return $resultado;
+}
+
+function Multiplica($soma,$num4,$num5)
+{
+    return $soma * floatval($num4) * floatval($num5);
+}
+
+function CalculoVar($num1,$num2,$num3,$num4,$num5)
+{
+    $soma3pri = floatval($num1) + floatval($num2) + floatval($num3);
+
+    $resultado = Multiplica($soma3pri,$num4,$num5);
+
+    return $resultado;
 }
