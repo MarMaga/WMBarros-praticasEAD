@@ -126,10 +126,12 @@ if (isset($_POST['btn_calcular'])) {
                     <input name="<?= 'n' . $i + 1 ?>" value="<?= isset($num[$i]) ? $num[$i] : '' ?>"
                         class="<?= isset($cores[$i]) ? $cores[$i] : 'bg-light' ?>">
                     <?php if ($erro[$i] == '') { ?>
-                        <input disabled type="text" style="border: none; background-color: white; color: red;" value=""><br>
+                        <label style="color: red;"></label><br>
+                        <!--<input disabled type="text" style="border: none; background-color: white; color: red;" value=""><br>-->
                     <?php } else { ?>
-                        <input disabled type="text" style="border: none; background-color: white; color: red;"
-                            value="<?= isset($erro[$i]) ? $erro[$i] : '' ?>"><br>
+                        <label style="color: red;"><?= isset($erro[$i]) ? $erro[$i] : '' ?></label><br>
+                        <!--<input disabled type="text" style="border: none; background-color: white; color: red;"
+                            value="<?= isset($erro[$i]) ? $erro[$i] : '' ?>"><br>-->
                     <?php } ?>
                 <?php } ?>
                 <br>

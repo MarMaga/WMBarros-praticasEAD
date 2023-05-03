@@ -35,11 +35,11 @@ if (isset($_POST['btn_calcular'])) {
             <div class="col-md-12">
                 <label>Número 1:</label>
                 <input name="num1" value="<?= isset($numero1) ? $numero1 : '' ?>">
-                <select name="operacao" selected="<?= isset($selOp) ? $selOp : 0 ?>">
-                    <option value="x">Multiplicar</option>
-                    <option value="/">Dividir</option>
-                    <option value="-">Subtrair</option>
-                    <option value="+">Somar</option>
+                <select name="operacao">
+                    <option value="x" selected="<?= isset($selOp) ? $selOp : 0 ?>">Multiplicar</option>
+                    <option value="/" selected="<?= isset($selOp) ? $selOp : 0 ?>">Dividir</option>
+                    <option value="-" selected="<?= isset($selOp) ? $selOp : 0 ?>">Subtrair</option>
+                    <option value="+" selected="<?= isset($selOp) ? $selOp : 0 ?>">Somar</option>
                 </select>
                 <label>Número 2:</label>
                 <input name="num2" value="<?= isset($numero2) ? $numero2 : '' ?>">
