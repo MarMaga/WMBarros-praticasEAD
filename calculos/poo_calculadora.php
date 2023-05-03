@@ -7,7 +7,7 @@ $numero2 = '';
 $numero3 = '';
 $res = '';
 
-if (isset($_POST['btn_calcular'])){
+if (isset($_POST['btn_calcular'])) {
 
     $numero1 = $_POST['num1'];
     $numero2 = $_POST['num2'];
@@ -15,8 +15,8 @@ if (isset($_POST['btn_calcular'])){
 
     $objcalc = new Calculo();
 
-    $res = $objcalc->CalcularCalculadora($numero1,$numero2,$op);
-}
+    $res = $objcalc->CalcularCalculadora($numero1, $numero2, $op);
+}   $selOp = "-";
 ?>
 
 <!DOCTYPE html>
@@ -35,11 +35,12 @@ if (isset($_POST['btn_calcular'])){
             <div class="col-md-12">
                 <label>Número 1:</label>
                 <input name="num1" value="<?= isset($numero1) ? $numero1 : '' ?>">
-                <select name="operacao">
+                <select name="operacao" selected="<?= isset($selOp) ? $selOp : 0 ?>">
                     <option value="x">Multiplicar</option>
                     <option value="/">Dividir</option>
                     <option value="-">Subtrair</option>
                     <option value="+">Somar</option>
+                </select>
                 <label>Número 2:</label>
                 <input name="num2" value="<?= isset($numero2) ? $numero2 : '' ?>">
                 <button name="btn_calcular" class="btn btn-primary">Calcular</button>

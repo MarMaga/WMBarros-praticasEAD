@@ -1,6 +1,5 @@
 <?php
-echo str_replace('ext/', 'php.exe', ini_get('extension_dir'));
-exit;
+
 include_once '../partes/_head.php';
 include_once '../funcao/funcoes.php';
 include_once '../funcao/fnc2.php';
@@ -10,6 +9,10 @@ if (isset($_POST['btn_calcular'])) {
     # armazena os campos em variáveis
     $salario = trim($_POST['salario']);
     $porcentagem = trim($_POST['porcentagem']);
+
+    # armazena os valores digitados para serem restaurados em caso de erro
+    $salarioDig = $salario;
+    $porcentagemDig = $porcentagem;
 
     $salario = str_replace(",", ".", $salario);
     $porcentagem = str_replace(",", ".", $porcentagem);
@@ -43,15 +46,16 @@ if (isset($_POST['btn_calcular'])) {
             $corPorcentagem = 'bg-success';
         }
     }
-echo 'Salario:' . $salario . '<br>';
-echo 'Porcent:' . $porcentagem . '<br>';
+
     if (!$errodigitacao && $valorAumentado != -1) {
 
         $valorNovoSalario = number_format(CalculaNovoSalario($salario, $valorAumentado), 2, ",", ".");
+        $salario = number_format(floatval($salario), 2, ",", ".");
+        $porcentagem = number_format(floatval($porcentagem), 2, ",", ".");
+    } else {
+        $salario = $salarioDig;
+        $porcentagem = $porcentagemDig;
     }
-    $salario = number_format(floatval($salario), 2, ",", ".");
-    $porcentagem = number_format(floatval($porcentagem), 2, ",", ".");
-
 }
 
 ?>
