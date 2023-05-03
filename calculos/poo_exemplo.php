@@ -32,7 +32,7 @@ if (isset($_POST['btn_somar'])){
 
 <body>
     <div class="card-body">
-        <form action="poo_ex1.php" method="post">
+        <form action="poo_exemplo.php" method="post">
             <div class="col-md-12">
                 <label>Número 1:</label>
                 <input name="num1" value="<?= isset($numero1) ? $numero1 : '' ?>"><br><br>

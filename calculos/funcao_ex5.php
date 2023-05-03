@@ -1,5 +1,6 @@
 <?php
-
+echo str_replace('ext/', 'php.exe', ini_get('extension_dir'));
+exit;
 include_once '../partes/_head.php';
 include_once '../funcao/funcoes.php';
 include_once '../funcao/fnc2.php';
@@ -18,7 +19,7 @@ if (isset($_POST['btn_calcular'])) {
     $salario = AjustaCasasDecimais($salario, 2);
     $valorAumentado = EncontraValorAumentado($salario, $porcentagem);
     if ($valorAumentado == 0) {
-        echo 'Preencher todos os campos da função<hr>';
+        echo 'Preencher TODOS os campos<hr>';
         $errodigitacao = true;
     } else {
         # se retornar -1, há algum número inválido
@@ -42,14 +43,15 @@ if (isset($_POST['btn_calcular'])) {
             $corPorcentagem = 'bg-success';
         }
     }
+echo 'Salario:' . $salario . '<br>';
+echo 'Porcent:' . $porcentagem . '<br>';
+    if (!$errodigitacao && $valorAumentado != -1) {
 
-    if (!$errodigitacao && $valorAumentado != -1){
-
-        $valorNovoSalario = number_format(CalculaNovoSalario($salario, $valorAumentado),2,",",".");
-
-        $salario = number_format(floatval($salario), 2, ",", ".");
-        $porcentagem = number_format(floatval($porcentagem), 2, ",", ".");
+        $valorNovoSalario = number_format(CalculaNovoSalario($salario, $valorAumentado), 2, ",", ".");
     }
+    $salario = number_format(floatval($salario), 2, ",", ".");
+    $porcentagem = number_format(floatval($porcentagem), 2, ",", ".");
+
 }
 
 ?>
@@ -80,7 +82,8 @@ if (isset($_POST['btn_calcular'])) {
                     value="<?= isset($erroPorcentagem) ? $erroPorcentagem : '' ?>"><br><br>
                 <button name="btn_calcular" class="btn btn-primary">Calcular</button><br><br>
                 <label>Novo Salário:</label>
-                <input value="<?= isset($valorNovoSalario) ? $valorNovoSalario : '' ?>" disabled class="bg-info"></input>
+                <input value="<?= isset($valorNovoSalario) ? $valorNovoSalario : '' ?>" disabled
+                    class="bg-info"></input>
             </div>
         </form>
     </div>

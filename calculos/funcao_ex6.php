@@ -1,7 +1,7 @@
 <?php
 
 include_once '../partes/_head.php';
-include_once '../funcao/funcoes.php';
+include_once '../funcao/fnc.php';
 
 if (isset($_POST['btn_calcular'])){
     #-------------------------------------------------------------------------

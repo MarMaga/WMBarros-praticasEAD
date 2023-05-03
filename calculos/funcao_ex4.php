@@ -57,7 +57,7 @@ if (isset($_POST['btn_calcular'])) {
                 $errodigitacao = true;
                 # define a cor vermelha do campo inválido
                 $cores[$i] = 'bg-danger';
-                # define o erro ao lado do campo inválido
+                # define o erro ao ladgito do campo inválido
                 $erro[$i] = 'Número inválido';
             } else {
                 # se for número válido, o campo fica verde e não tem mensagem de erro
