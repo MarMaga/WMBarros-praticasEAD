@@ -12,6 +12,8 @@ $n4Enabled = 'disabled';
 $n5Enabled = 'disabled';
 $btnMediaEnabled = 'disabled';
 
+$Anna = '../img/Annabelle1.jpg';
+
 if (isset($_POST['btn_liberar'])) {
 
     $nAcesso = $_POST['nAcesso'];
@@ -21,7 +23,9 @@ if (isset($_POST['btn_liberar'])) {
     $ret = $objAnab->LiberarAcesso($nAcesso);
 
     if ($ret == 0) {
-        echo 'Número inválido<hr>';
+        $mensagem = 'Número inválido';
+        $corMensagem = 'red';
+        $Anna = '../img/Annabelle2.jpg';
     } else {
         # desativa o input Acesso e o botão Liberar Acesso
         $nAcessoEnabled = 'readonly';
@@ -47,10 +51,18 @@ if (isset($_POST['btn_somar'])) {
 
     switch ($ret) {
         case 0:
-            echo 'Digite os dois números<hr>';
+            $mensagem = 'Digite os dois números (1 e 2)';
+            $corMensagem = 'red';
+            $Anna = '../img/Annabelle2.jpg';
+
+            $n1Enabled = '';
+            $n2Enabled = '';
+            $btnSomaEnabled = '';
             break;
         case -1:
-            echo 'Soma dos números incorreta<hr>';
+            $mensagem = 'Soma dos números incorreta';
+            $corMensagem = 'red';
+            $Anna = '../img/Annabelle3.jpg';
 
             $n1Enabled = '';
             $n2Enabled = '';
@@ -95,10 +107,16 @@ if (isset($_POST['btn_media'])) {
     $ret = $objAnab->Media($n1, $n2, $n3, $n4, $n5);
 
     if ($ret == 0) {
-        echo 'Digite os três números<hr>';
+        $mensagem = 'Digite os três números (3, 4 e 5)';
+        $corMensagem = 'red';
+        $Anna = '../img/Annabelle4.jpg';
+        $media = '';
+    } else {
+        $mensagem = 'ANNABELLE KILLED';
+        $corMensagem = 'green';
+        $Anna = '../img/DeadAnnabelle.jpg';
+        $media = number_format($ret, 2, ",", ".");
     }
-
-    $media = number_format($ret,0,"",".");
 }
 ?>
 
@@ -114,6 +132,13 @@ if (isset($_POST['btn_media'])) {
 
 <body>
     <form action="anabelle.php" method="post">
+        <br>
+        <label style="color: <?= $corMensagem ?>;">
+            <?= isset($mensagem) ? $mensagem : '' ?>
+        </label>
+        <?= isset($mensagem) ? '<hr>' : '' ?>
+        <img src="<?= $Anna ?>" width=200 height="280">
+        <br><br>
         <label>Digite o número de acesso:</label>
         <input name="nAcesso" value="<?= isset($nAcesso) ? $nAcesso : '' ?>" <?= $nAcessoEnabled ?>>
         <br><br>
@@ -138,7 +163,8 @@ if (isset($_POST['btn_media'])) {
         <br><br>
         <button name="btn_media" <?= $btnMediaEnabled ?>>Calcular média</button>
         <hr>
-        <input name="media" value="<?= isset($media) ? $media : '' ?>" disabled>
+        <label>Média:</label>
+        <input name="media" value="<?= isset($media) ? $media : '' ?>" readonly>
     </form>
 </body>
 
